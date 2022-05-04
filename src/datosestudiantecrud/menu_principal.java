@@ -29,12 +29,18 @@ public class menu_principal {
         
         switch (opcionMenu) {
             case "1":
+                create c= new create();
+                
                 break;
             case "2":
+                Read r= new Read();
                 break;
             case "3":
+                
+                update u= new update();
                 break;
             case "4":
+                Delete d= new Delete();
                 break;
             case "5":
                 System.exit(0);

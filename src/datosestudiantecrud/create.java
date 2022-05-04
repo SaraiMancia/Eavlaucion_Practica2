@@ -11,19 +11,20 @@ public class create {
     create () throws SQLException {
         Scanner leer = new Scanner(System.in);
         Estudiante estudiante = new Estudiante();
+        
         System.out.println("<< CREAR REGISTRO >>");
         
         System.out.println("Ingrese el ID del estudiante");
         estudiante.setId_estudiante(leer.nextInt());
         
         System.out.println("Ingrese el Carnet del estudiante");
-        estudiante.setCarnet_estudiante(leer.nextInt());
+        estudiante.setCarnet_estudiante(leer.next());
         
         System.out.println("Ingrese el Nombre del estudiante: ");
-        estudiante.setNom_estudiante(leer.nextLine());
+        estudiante.setNom_estudiante(leer.next());
         
         System.out.println("Ingrese el Apellido del estudiante: ");
-        estudiante.setApe_estudiante(leer.nextLine());
+        estudiante.setApe_estudiante(leer.next());
         
         System.out.println("Ingrese la Edad del estudiante: ");
         estudiante.setEdad_estudiante(leer.nextInt());

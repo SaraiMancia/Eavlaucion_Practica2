@@ -26,7 +26,7 @@ public class update {
         e.setApe_estudiante(leer.next());
         
         System.out.println("Carnet: ");
-        e.setCarnet_estudiante(leer.nextInt());
+        e.setCarnet_estudiante(leer.nextLine());
         
         String tabla="estudiante";
         String camposValoresnuevos="carnet_estudiante='"+e.getCarnet_estudiante()+"', nom_estudiante= '"+e.getNom_estudiante()+"', ape_estudiante='"+e.getApe_estudiante()+"', edad_estudiante='"+e.getEdad_estudiante();
