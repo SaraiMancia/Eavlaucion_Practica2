@@ -12,28 +12,29 @@ public class ConexionCRUD {
     
     private final String driverConector = "com.mysql.jdbc.Driver";
     
-    private final String Connection Conexion;
+    private static  Connection Conexion;
     
     public ConexionCRUD(){
         try{
-            Class.forName(driveConector);
+            Class.forName(driverConector);
             
             Conexion=DriverManager.getConnection(servidor, usuario,clave);
-        }catch(ClassNotFoudException | SQLException e) {
+        }catch(ClassNotFoundException | SQLException e) {
             System.out.println("Conexión fallida! Error! : " + e.getMessage());
             
         }
     }
 public Connection getConnection(){
-return conexion;    
+return Conexion;    
     }
 public void guardarRegistros(String tabla, String camposTabla, String valoresCampos){
     ConexionCRUD conectar = new ConexionCRUD();
-    ConexionCRUD cone = conectar.getConnection();
+    Connection cone = conectar.getConnection();
     try {
-        String sqlQueryStmt - " INSERT INTO " + tabla + "("+ camposTabla + ") VALUE (" + valoresCampos + ");";
+        String sqlQueryStmt = " INSERT INTO " + tabla + "("+ camposTabla + ") VALUE (" + valoresCampos + ");";
         
         Statement stmt;
+        stmt=cone.createStatement();
         stmt.executeUpdate(sqlQueryStmt);
         
         stmt.close();
@@ -46,7 +47,7 @@ public void guardarRegistros(String tabla, String camposTabla, String valoresCam
 public void actualizarEliminarRegistro(String tabla, String valoresCamposNuevos, String condicion){
     
     ConexionCRUD conectar = new ConexionCRUD();
-    Connection cone = conectar.getConnetion();
+    Connection cone = conectar.getConnection();
     try{
         Statement stmt;
         String sqlQueryStmt;
@@ -57,7 +58,7 @@ public void actualizarEliminarRegistro(String tabla, String valoresCamposNuevos,
             sqlQueryStmt = "UPDATE" + tabla + "SET" + valoresCamposNuevos + "WHERE" + condicion + ";";
         }
         stmt = cone.createStatement();
-        stmt = executeUpdate(sqlQueryStmt);
+        stmt.executeUpdate(sqlQueryStmt);
         stmt.close();
         cone.close();
     }catch(SQLException ex) {
@@ -66,12 +67,12 @@ public void actualizarEliminarRegistro(String tabla, String valoresCamposNuevos,
         }
     }
 
-    public void desplegarRegistros(String tablaBuscar, String camposBuscar, String condicionBuscar) throws SQLExeption{
+    public void desplegarRegistros(String tablaBuscar, String camposBuscar, String condicionBuscar) throws SQLException{
         ConexionCRUD conectar = new   ConexionCRUD();
         Connection cone = conectar.getConnection();
         try {
             Statement stmt;
-            String sqlQuerryStmt;
+            String sqlQueryStmt;
             if(condicionBuscar.equals("")){
                 sqlQueryStmt = "SELECT" + camposBuscar + "FROM" + tablaBuscar +";";
             }else{
@@ -81,7 +82,7 @@ public void actualizarEliminarRegistro(String tabla, String valoresCamposNuevos,
             stmt = cone.createStatement();
             stmt.executeQuery(sqlQueryStmt);
             
-            try(ResulSet miResultSet = stmt.executeQuery( sqlQueryStmt) {
+            try(ResultSet miResultSet = stmt.executeQuery( sqlQueryStmt) ){
              if (miResultSet.next())  { 
                 ResultSetMetaData metaData = miResultSet.getMetaData();
                 int numColumnas = metaData.getColumnCount();
@@ -94,7 +95,7 @@ public void actualizarEliminarRegistro(String tabla, String valoresCamposNuevos,
                  System.out.println();
                  do{
                      for (int i = 1; i<=numColumnas; i++){
-                 System.out.println("%-20s\t",miResultSet.getObject(i));
+                 System.out.printf("%-20s\t",miResultSet.getObject(i));
             }
             System.out.println();
        }while (miResultSet.next());

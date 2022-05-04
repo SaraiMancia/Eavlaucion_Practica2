@@ -10,7 +10,7 @@ public class Delete {
     
     Delete() throws SQLException {
         Scanner leer = new Scanner(System.in);
-        conexionCRUD utilerias = new conexionCRUD();
+        ConexionCRUD utilerias = new ConexionCRUD();
         System.out.println("<< ELIMINAR REGISTROS >>");
         
         System.out.println("Ingrese el ID del registro: ");
