@@ -33,7 +33,7 @@ public class create {
         String valoresCampo = "'" + estudiante.getId_estudiante()+ "','" + estudiante.getCarnet_estudiante() + "','" +
                 estudiante.getNom_estudiante() + "','" + estudiante.getApe_estudiante() + "','" + estudiante.getEdad_estudiante() + "','";
         
-        conexionCRUD utilerias = new conexionCRUD();
+        ConexionCRUD utilerias = new ConexionCRUD();
         
         utilerias.guardarRegistros(tabla, camposTabla, valoresCampo);
         

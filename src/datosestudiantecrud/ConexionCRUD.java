@@ -12,13 +12,13 @@ public class ConexionCRUD {
     
     private final String driverConector = "com.mysql.jdbc.Driver";
     
-    private final String Connection conxion;
+    private final String Connection Conexion;
     
     public ConexionCRUD(){
         try{
             Class.forName(driveConector);
             
-            conexion=DriverManager.getConnection(servidor, usuario,clave);
+            Conexion=DriverManager.getConnection(servidor, usuario,clave);
         }catch(ClassNotFoudException | SQLException e) {
             System.out.println("Conexión fallida! Error! : " + e.getMessage());
             
@@ -65,5 +65,52 @@ public void actualizarEliminarRegistro(String tabla, String valoresCamposNuevos,
         
         }
     }
-}
+
+    public void desplegarRegistros(String tablaBuscar, String camposBuscar, String condicionBuscar) throws SQLExeption{
+        ConexionCRUD conectar = new   ConexionCRUD();
+        Connection cone = conectar.getConnection();
+        try {
+            Statement stmt;
+            String sqlQuerryStmt;
+            if(condicionBuscar.equals("")){
+                sqlQueryStmt = "SELECT" + camposBuscar + "FROM" + tablaBuscar +";";
+            }else{
+                sqlQueryStmt = "SELECT" + camposBuscar + "FROM" + tablaBuscar + "WHERE" + condicionBuscar;
+            }
+            
+            stmt = cone.createStatement();
+            stmt.executeQuery(sqlQueryStmt);
+            
+            try(ResulSet miResultSet = stmt.executeQuery( sqlQueryStmt) {
+             if (miResultSet.next())  { 
+                ResultSetMetaData metaData = miResultSet.getMetaData();
+                int numColumnas = metaData.getColumnCount();
+                System.out.println("<< REGISTROS ALMACENADOS >>");
+                System.out.println();
+                
+                for (int i=1; i<=numColumnas; i++){
+                     System.out.printf("%-20s\t", metaData.getColumnName(i));
+                }
+                 System.out.println();
+                 do{
+                     for (int i = 1; i<=numColumnas; i++){
+                 System.out.println("%-20s\t",miResultSet.getObject(i));
+            }
+            System.out.println();
+       }while (miResultSet.next());
+                 System.out.println();
+             } else{
+                 System.out.println("No se han encontrado registros");
+             }
+             miResultSet.close();
+            }finally{
+                
+                stmt.close();
+                cone.close();
+             }
+        }catch (SQLException ex){
+            System.out.println("Ha ocurrido el siguiente error: " + ex.getMessage());
+        }
+    }
+
 }
