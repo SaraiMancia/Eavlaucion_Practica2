@@ -14,8 +14,7 @@ public class create {
         
         System.out.println("<< CREAR REGISTRO >>");
         
-        System.out.println("Ingrese el ID del estudiante");
-        estudiante.setId_estudiante(leer.nextInt());
+  
         
         System.out.println("Ingrese el Carnet del estudiante");
         estudiante.setCarnet_estudiante(leer.next());
@@ -29,10 +28,10 @@ public class create {
         System.out.println("Ingrese la Edad del estudiante: ");
         estudiante.setEdad_estudiante(leer.nextInt());
         
-        String tabla = "bd_registro_estudiante";
-        String camposTabla = "id_estudiante, carnet_estudiante, nom_estudiante, ape_estudiante, edad_estudiante";
-        String valoresCampo = "'" + estudiante.getId_estudiante()+ "','" + estudiante.getCarnet_estudiante() + "','" +
-                estudiante.getNom_estudiante() + "','" + estudiante.getApe_estudiante() + "','" + estudiante.getEdad_estudiante() + "','";
+        String tabla = "estudiante";
+        String camposTabla = " carnet_estudiante, nom_estudiante, ape_estudiante, edad_estudiante";
+        String valoresCampo = "'" + estudiante.getCarnet_estudiante() + "','" +
+                estudiante.getNom_estudiante() + "','" + estudiante.getApe_estudiante() + "','" + estudiante.getEdad_estudiante() + "'";
         
         ConexionCRUD utilerias = new ConexionCRUD();
         
