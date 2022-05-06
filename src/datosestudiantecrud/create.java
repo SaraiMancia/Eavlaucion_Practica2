@@ -16,16 +16,16 @@ public class create {
         
   
         
-        System.out.println("Ingrese el Carnet del estudiante");
+        System.out.println("Ingrese Carnet del estudiante");
         estudiante.setCarnet_estudiante(leer.next());
         
-        System.out.println("Ingrese el Nombre del estudiante: ");
+        System.out.println("Ingrese  Nombre del estudiante: ");
         estudiante.setNom_estudiante(leer.next());
         
-        System.out.println("Ingrese el Apellido del estudiante: ");
+        System.out.println("Ingrese  Apellido del estudiante: ");
         estudiante.setApe_estudiante(leer.next());
         
-        System.out.println("Ingrese la Edad del estudiante: ");
+        System.out.println("Ingrese  Edad del estudiante: ");
         estudiante.setEdad_estudiante(leer.nextInt());
         
         String tabla = "estudiante";
